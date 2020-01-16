@@ -34,6 +34,11 @@ public class SortStrings {
 			e.printStackTrace();
 		}
 	}
+	
+	public ArrayList<ArrayList<String>> getNames() {
+		
+		return names; 
+	}
 
 	public boolean checkString(String s1) {
 
@@ -196,13 +201,13 @@ public class SortStrings {
 
 		SortStrings so = new SortStrings("C:/Users/Krzysiek/Desktop/fileIn.txt",
 				"C:/Users/Krzysiek/Desktop/fileOut.txt");
-		so.quickSortRandom(0, so.names.size() - 1);
+		so.quickSortRandom(0, so.getNames().size() - 1);
 		so.collectorOfStringsAndWriter();
 		so.close();
 
 		SortStrings so1 = new SortStrings("C:/Users/Krzysiek/Desktop/fileIn.txt",
 				"C:/Users/Krzysiek/Desktop/fileOut1.txt");
-		so1.insertSort(0, so1.names.size() - 1);
+		so1.insertSort(0, so1.getNames().size() - 1);
 		so1.collectorOfStringsAndWriter();
 		so1.close();
 	}
