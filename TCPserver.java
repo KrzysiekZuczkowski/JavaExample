@@ -69,33 +69,20 @@ public class TCPserver {
  
 		ServerSocket welcomSocket = new ServerSocket(9996);
 		try { 
-			// byte[] key = Files.readAllBytes(Paths.get("klucz1"));
+			
 			while (true) {
 				Socket conectionSocket = welcomSocket.accept();
 				try {
 					BufferedReader inFromClient = new BufferedReader(
 							new InputStreamReader(conectionSocket.getInputStream()));
 					DataOutputStream outToClient = new DataOutputStream(conectionSocket.getOutputStream());
-
-//					DataOutputStream out = new DataOutputStream(new BufferedOutputStream(conectionSocket.getOutputStream()));
-//					DataInputStream in = new DataInputStream((conectionSocket.getInputStream()));
 					    
 					String strp = inFromClient.readLine();
 					String strg = inFromClient.readLine();
 					String strAliceValue = inFromClient.readLine(); 
 
-//					FileOutputStream out1 = new FileOutputStream("podpis");
-//					
-//					   byte[] data = new byte[4096];
-//					   int bytesRead, totalBytes = 0;
-//					   while( (bytesRead = in.read(data)) > 0) {
-//					     out1.write(data, 0, bytesRead);
-//					     totalBytes += bytesRead;
-//					   }
-//					   out1.close();
 					String strsig = inFromClient.readLine();
 					byte[] sigBytes = DatatypeConverter.parseHexBinary(strsig);
-					//System.arraycopy(ByteBuffer.allocate(count).put(buffer).array(), 0, sigBytes, 0, count);
 					
 					String wiadomosc = strp + strg + strAliceValue;
 					byte[] message = wiadomosc.getBytes(StandardCharsets.UTF_8);
@@ -173,21 +160,3 @@ public class TCPserver {
 		}
 	}
 }
-
-// zdanieClient = inFromClient.readLine();
-// zdanieServer = zdanieClient.replace('j', 'k') + '\n' + "jak cos" + '\n' +
-// "to"
-// + '\n';
-// outToClient.writeBytes(zdanieServer);
-// inFromClient.close();
-// outToClient.close();
-// } finally {
-// conectionSocket.close();
-// }
-//
-// }
-// } finally {
-// welcomSocket.close();
-// }
-// }
-// }
