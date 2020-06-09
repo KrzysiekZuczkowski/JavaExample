@@ -23,7 +23,7 @@ public class Year {
         this.year += year;
         if (!isValidYear(this.year))  {
             System.out.println("The year cannot be lees than zero");
-            this.year = 0;
+            this.year = 1;
         }
     }
 }

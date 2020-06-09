@@ -6,11 +6,7 @@ public class Hour extends Day {
     public int getHour() {
         return hour;
     }
-
-    public static boolean isValidHour(int hour) {
-        return (hour >= 0 && hour < 24);
-    }
-
+    
     public void setHour(int hour) {
         if(isValidHour(hour))
             this.hour = hour;
@@ -18,6 +14,10 @@ public class Hour extends Day {
             System.out.println("Set hour between 0 and 23");
     }
 
+    public static boolean isValidHour(int hour) {
+        return (hour >= 0 && hour < 24);
+    }
+    
     public void setFutureHours(int hour) {
         int sumHour = this.hour + hour;
         if (sumHour < 0)

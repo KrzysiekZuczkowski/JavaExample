@@ -7,15 +7,15 @@ public class Minute extends Hour {
         return minute;
     }
 
-    public static boolean isValidMinute(int minute) {
-        return (minute >= 0 && minute < 60);
-    }
-
     public void setMinute(int minute) {
         if(isValidMinute(minute))
             this.minute = minute;
         else
             System.out.println("Set minute between 0 and 59");
+    }
+
+    public static boolean isValidMinute(int minute) {
+        return (minute >= 0 && minute < 60);
     }
 
     public void setFutureMinutes(int minute) {

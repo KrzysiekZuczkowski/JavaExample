@@ -6,11 +6,7 @@ public class Second extends Minute{
     public int getSecond() {
         return second;
     }
-
-    public static boolean isValidSecond(int second) {
-        return (second >= 0 && second < 60);
-    }
-
+    
     public void setSecond(int second) {
         if(isValidSecond(second))
             this.second = second;
@@ -18,6 +14,10 @@ public class Second extends Minute{
             System.out.println("Set second between 0 and 59");
     }
 
+    public static boolean isValidSecond(int second) {
+        return (second >= 0 && second < 60);
+    }
+    
     public void setFutureSeconds(long second) {
         long sumSecond = this.second + second;
 

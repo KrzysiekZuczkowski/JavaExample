@@ -1,9 +1,8 @@
 package time;
 
 public class Day extends Month {
-
-    private String dayName = "Saturday";
     private int day = 1;
+    private String dayName = "Monday";
 
     public int getDay() {
         return day;
@@ -21,35 +20,6 @@ public class Day extends Month {
     public void setYear(int year) {
         super.setYear(year);
         setFutureDays(0);
-    }
-
-    public int getDaysNumber() {
-        int sumDays = this.day;
-        int month = 1;
-        int year = 0;
-        int monthCounter = 1;
-        //int monthDays = getMonthDaysNumber(month, year);
-        int monthNumber = getYear() * 12 + getMonth();
-
-        while (monthCounter < monthNumber) {
-            sumDays += getMonthDaysNumber(month++, year);
-            if (month == 13) {
-                month = 1;
-                year++;
-            }
-            monthCounter++;
-        }
-        return sumDays;
-    }
-
-    public void setDay(int day) {
-        int monthDays = getMonthDaysNumber(getMonth(), getYear());
-        if (day > 0 && day <= monthDays) {
-            this.day = day;
-            this.dayName = getDayName(getDaysNumber() % 7);
-        }
-        else
-            System.out.println("Set day between 1 to " + monthDays);
     }
 
     public void setFutureDays(int day) {
@@ -81,7 +51,7 @@ public class Day extends Month {
         }
     }
 
-    public static int getMonthDaysNumber(int month, int year) {
+    public int getMonthDaysNumber(int month, int year) {
         int monthDays = 0;
         switch (month) {
             case 1: case 3: case 5: case 7: case 8: case 10: case 12:
@@ -91,26 +61,56 @@ public class Day extends Month {
                 monthDays = 30;
                 break;
             case 2:
-                if (((year % 4 == 0) && !(year % 100 == 0)) || (year % 400 == 0))
+                monthDays = 28;
+                if (isALeapYear(year))
                     monthDays = 29;
-                else
-                    monthDays = 28;
                 break;
         }
         return monthDays;
     }
 
-    public static String getDayName(int day) {
-        String dayName = "";
+    public boolean isALeapYear(int year) {
+        return ((year % 4 == 0 && !(year % 100 == 0)) || (year % 400 == 0));
+    }
+
+    public String getDayName(int day) {
         switch(day) {
-            case 0: return "Friday";
-            case 1: return "Saturday";
-            case 2: return "Sunday";
-            case 3: return "Monday";
-            case 4: return "Tuesday";
-            case 5: return "Wednesday";
-            case 6: return "Thursday";
+            case 0: return "Sunday";
+            case 1: return "Monday";
+            case 2: return "Tuesday";
+            case 3: return "Wednesday";
+            case 4: return "Thursday";
+            case 5: return "Friday";
+            case 6: return "Saturday";
         }
-        return dayName;
+        return "";
+    }
+
+    public int getDaysNumber() {
+        int sumDays = this.day;
+        int month = 1;
+        int year = 1;
+        int monthCounter = 12;
+        int monthNumber = getYear() * 12 + getMonth() - 1;
+
+        while (monthCounter < monthNumber) {
+            sumDays += getMonthDaysNumber(month++, year);
+            if (month == 13) {
+                month = 1;
+                year++;
+            }
+            monthCounter++;
+        }
+        return sumDays;
+    }
+
+    public void setDay(int day) {
+        int monthDays = getMonthDaysNumber(getMonth(), getYear());
+        if (day > 0 && day <= monthDays) {
+            this.day = day;
+            this.dayName = getDayName(getDaysNumber() % 7);
+        }
+        else
+            System.out.println("Set day between 1 to " + monthDays);
     }
 }
